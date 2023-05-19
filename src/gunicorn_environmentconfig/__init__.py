@@ -3,7 +3,7 @@ from configparser import ConfigParser
 import os
 
 
-__version__ = '1.1.0.dev0'
+__version__ = '1.0.1.dev0'
 
 
 def apply(cfg):
@@ -14,6 +14,8 @@ def apply(cfg):
     if iniconfig:
         environ.update(parse_inifile(iniconfig))
     environ.update(os.environ)
+    if iniconfig:
+        os.environ.update(environ)
 
     for key, value in environ.items():
         if not key.startswith('gunicorn.'):
